@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "207477042005",
+    "project_id": "syncplay-8d31c",
+    "storage_bucket": "syncplay-8d31c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:207477042005:android:4765cad7aa224204c71ddc",
+        "android_client_info": {
+          "package_name": "com.example.syncplay"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC2kfEpFvYXxxtqdTDX7CgvU9_I1DduLM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Syncplay</string>
+    <string name="defaultSpinnerSexo">Selecciona una opción</string>
+
+    <string-array name="spinnerSexo">
+        <item>Seleccione una opción</item>
+        <item>Hombre</item>
+        <item>Mujer</item>
+        <item>Otro</item>
+    </string-array>
+</resources>
