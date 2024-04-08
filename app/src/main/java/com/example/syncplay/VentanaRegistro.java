@@ -2,8 +2,10 @@ package com.example.syncplay;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +35,11 @@ public class VentanaRegistro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ventana_registro);
 
+        ConstraintLayout layout = findViewById(R.id.constraintlayoutid);
+        AnimationDrawable fondo = (AnimationDrawable) layout.getBackground();
+        fondo.setEnterFadeDuration(2500);
+        fondo.setExitFadeDuration(5000);
+        fondo.start();
 
         Bundle bundle = getIntent().getExtras();
         correo = bundle.getString("correo");

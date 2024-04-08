@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondolista"
-    android:id="@+id/mainlayout">
+    android:background="@drawable/fondolista">
 
     <ImageView
         android:id="@+id/imageView"
@@ -12,7 +12,7 @@
         android:layout_height="120dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="64dp"
-        android:src="@drawable/fondoapp" />
+        android:src="@mipmap/icono_round" />
 
     <EditText
         android:id="@+id/editTextCorreoElectronico"
@@ -23,7 +23,8 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
         android:hint="Correo electrónico"
-        android:inputType="textEmailAddress" />
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp" />
 
     <EditText
         android:id="@+id/editTextPassword"
@@ -34,7 +35,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:hint="Contraseña"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        android:minHeight="48dp" />
 
     <Button
         android:id="@+id/buttonIniciarSesion"
@@ -44,10 +46,13 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="32dp"
-        android:background="@drawable/rounded_button"
+
+        android:backgroundTint="#e63946"
         android:text="Iniciar Sesión"
-        android:textColor="#FFFFFF"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF" />
+
+    <!-- android:background="@drawable/rounded_button" -->
 
     <TextView
         android:id="@+id/textViewRegister"
