@@ -8,4 +8,5 @@
         <item>Mujer</item>
         <item>Otro</item>
     </string-array>
+    <string name="title_activity_principal">Principal</string>
 </resources>

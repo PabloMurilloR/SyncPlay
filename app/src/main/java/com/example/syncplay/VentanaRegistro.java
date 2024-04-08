@@ -4,10 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -41,17 +43,23 @@ public class VentanaRegistro extends AppCompatActivity {
         fondo.setExitFadeDuration(5000);
         fondo.start();
 
-        Bundle bundle = getIntent().getExtras();
-        correo = bundle.getString("correo");
-
         editTextNombreRegistro = (EditText) findViewById(R.id.editTextNombreRegistro);
         editTextCorreoRegistro = (EditText) findViewById(R.id.editTextCorreoRegistro);
         editTextContrasena = (EditText) findViewById(R.id.editTextContrasena);
         editTextTelefonoRegistro = (EditText) findViewById(R.id.editTextTelefonoRegistro);
         editTextUsuarioRegistro = (EditText) findViewById(R.id.editTextUsuario);
         botonRegistro = (Button) findViewById(R.id.buttonEnviar);
+        editTextCorreoRegistro = (EditText) findViewById(R.id.editTextCorreoRegistro);
 
-        editTextCorreoRegistro.setText(correo);
+        View rootView = findViewById(android.R.id.content);
+        rootView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Oculta el teclado cuando se detecta un evento de toque en la vista raíz
+                hideKeyboard(VentanaRegistro.this);
+                return false;
+            }
+        });
 
         editTextNombreRegistro.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -70,11 +78,15 @@ public class VentanaRegistro extends AppCompatActivity {
             }
         });
 
+    }
 
-
-
-
-
+    public void hideKeyboard(Context context) {
+        InputMethodManager inputMethodManager = (InputMethodManager) context.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = getCurrentFocus();
+        if (view == null) {
+            view = new View(context);
+        }
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     synchronized private void annadirRegistro(){

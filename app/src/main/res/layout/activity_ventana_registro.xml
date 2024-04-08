@@ -2,23 +2,23 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintlayoutid"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondolista"
-    tools:context=".VentanaRegistro"
-    android:id="@+id/constraintlayoutid">
+    tools:context=".VentanaRegistro">
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="112dp"
         android:layout_height="109dp"
+        android:src="@mipmap/icono_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
-        android:src="@mipmap/icono_round" />
+        app:layout_constraintVertical_bias="0.043" />
 
     <ScrollView
         android:layout_width="408dp"
@@ -110,6 +110,7 @@
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginEnd="10dp"
+                android:backgroundTint="#e63946"
                 android:gravity="center"
                 android:text="Continuar" />
 
