@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editTextDireccion, editTextPassword;
     private TextView textviewRegistro;
     private FirebaseFirestore db;
+    boolean correoOK;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniciarSesion(String correo, String contrasena){
-        Log.d("ADIOS", "HE LLEGAO");
+        correoOK = false;
         db.collection("users").whereEqualTo("Correo", correo).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot document : task.getResult()) {
                                 // Obtener la contraseña y el correo almacenads en Firebase para el usuario
-                                Log.d("HOLA","HE LLEGADO");
+                                correoOK = true;
                                 String contrasenaFirebase = document.getString("Contrasena");
 
                                 // Verificar si la contraseña ingresada coincide con la almacenada en Firebase
@@ -107,7 +108,9 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.makeText(MainActivity.this, "Correo electrónico o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                                 }
                             }
-                        Log.w("AAAAA", "AAAAAAAAAA");
+                            if (!correoOK) {
+                                Toast.makeText(MainActivity.this, "Correo no registrado", Toast.LENGTH_LONG).show();
+                            }
                         } else {
                             Toast.makeText(MainActivity.this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
                         }
