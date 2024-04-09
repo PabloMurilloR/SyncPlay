@@ -30,7 +30,7 @@ public class VentanaRegistro extends AppCompatActivity {
     private Spinner spinerSexo;
     private EditText editTextNombreRegistro,editTextCorreoRegistro,editTextContrasena,editTextTelefonoRegistro,editTextUsuarioRegistro;
     private Button botonRegistro;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +43,9 @@ public class VentanaRegistro extends AppCompatActivity {
         fondo.setExitFadeDuration(5000);
         fondo.start();
 
+        db = FirebaseFirestore.getInstance();
+
+        spinerSexo = (Spinner) findViewById(R.id.spinnerSexo);
         editTextNombreRegistro = (EditText) findViewById(R.id.editTextNombreRegistro);
         editTextCorreoRegistro = (EditText) findViewById(R.id.editTextCorreoRegistro);
         editTextContrasena = (EditText) findViewById(R.id.editTextContrasena);
@@ -75,7 +78,7 @@ public class VentanaRegistro extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!editTextContrasena.getText().toString().equals("") && !editTextCorreoRegistro.getText().toString().equals("") &&
-                    !editTextNombreRegistro.getText().toString().equals("") && !spinerSexo.getSelectedItem().toString().equals("") &&
+                    !editTextNombreRegistro.getText().toString().equals("") && spinerSexo.getSelectedItem() != null &&
                     !editTextTelefonoRegistro.getText().toString().equals("") && !editTextUsuarioRegistro.getText().toString().equals("")) {
                     annadirRegistro(editTextContrasena.getText().toString(), editTextCorreoRegistro.getText().toString(),
                                     editTextNombreRegistro.getText().toString(), spinerSexo.getSelectedItem().toString(),

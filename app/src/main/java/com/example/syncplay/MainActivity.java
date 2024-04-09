@@ -16,13 +16,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -84,37 +84,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void iniciarSesion(String correo, String contrasena){
-        db.collection("users").document(correo).get()
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        Log.d("ADIOS", "HE LLEGAO");
+        db.collection("users").whereEqualTo("Correo", correo).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-                            DocumentSnapshot document = task.getResult();
-                            if (document.exists()) {
-                                // El documento del usuario existe en Firestore
-                                // Recupera los datos del usuario
-                                String storedEmail = document.getString("Correo");
-                                String storedPassword = document.getString("Contrasena");
+                            for (DocumentSnapshot document : task.getResult()) {
+                                // Obtener la contraseña y el correo almacenads en Firebase para el usuario
+                                Log.d("HOLA","HE LLEGADO");
+                                String contrasenaFirebase = document.getString("Contrasena");
 
-                                // Verifica si los datos proporcionados coinciden con los datos almacenados
-                                if (correo.equals(storedEmail) && contrasena.equals(storedPassword)) {
-                                    // Inicio de sesión exitoso
+                                // Verificar si la contraseña ingresada coincide con la almacenada en Firebase
+                                if (contrasenaFirebase.equals(contrasena)) {
                                     Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
 
                                     Intent actividadPrincipal = new Intent(MainActivity.this, VentanaPrincipal.class);
+                                    actividadPrincipal.putExtra("Usuario", document.getString("Usuario"));
                                     startActivity(actividadPrincipal);
                                 } else {
-                                    // Credenciales incorrectas
-                                    Toast.makeText(MainActivity.this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show();
+                                    // Si no se encuentra el correo o la contraseña es incorrecta, mostrar un mensaje de error
+                                    Toast.makeText(MainActivity.this, "Correo electrónico o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                                 }
-                            } else {
-                                // El usuario no existe en Firestore
-                                Toast.makeText(MainActivity.this, "Usuario no encontrado", Toast.LENGTH_SHORT).show();
                             }
+                        Log.w("AAAAA", "AAAAAAAAAA");
                         } else {
-                            // Error al obtener el documento del usuario
-                            Log.d("LoginActivity", "Error getting document: ", task.getException());
-                            Toast.makeText(MainActivity.this, "Error al obtener el documento del usuario", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "Error al iniciar sesión", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -127,15 +122,5 @@ public class MainActivity extends AppCompatActivity {
             view = new View(context);
         }
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
-
-    private void alerta(String problema){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        // Establecemos el título del diálogo
-        builder.setTitle("¡¡Atención!!");
-        builder.setMessage(problema);
-        builder.setPositiveButton("Aceptar", null);
-        AlertDialog dialog = builder.create();
-        dialog.show();
     }
 }
