@@ -9,4 +9,11 @@
         <item>Otro</item>
     </string-array>
     <string name="title_activity_principal">Principal</string>
+    <string name="Registro">Registrarme</string>
+    <string name="contrasena">Contraseña</string>
+    <string name="correo">Correo Electrónico</string>
+    <string name="nombre_completo">Nombre Completo</string>
+    <string name="telefono">Teléfono</string>
+    <string name="usuario">Usuario</string>
+    <string name="logoapp">LogoApp</string>
 </resources>

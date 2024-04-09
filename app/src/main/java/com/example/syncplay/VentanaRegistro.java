@@ -15,6 +15,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -31,7 +32,6 @@ public class VentanaRegistro extends AppCompatActivity {
     private Button botonRegistro;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    private String correo="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +74,15 @@ public class VentanaRegistro extends AppCompatActivity {
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                annadirRegistro();
+                if (!editTextContrasena.getText().toString().equals("") && !editTextCorreoRegistro.getText().toString().equals("") &&
+                    !editTextNombreRegistro.getText().toString().equals("") && !spinerSexo.getSelectedItem().toString().equals("") &&
+                    !editTextTelefonoRegistro.getText().toString().equals("") && !editTextUsuarioRegistro.getText().toString().equals("")) {
+                    annadirRegistro(editTextContrasena.getText().toString(), editTextCorreoRegistro.getText().toString(),
+                                    editTextNombreRegistro.getText().toString(), spinerSexo.getSelectedItem().toString(),
+                                    editTextTelefonoRegistro.getText().toString(), editTextUsuarioRegistro.getText().toString());
+                } else {
+                    Toast.makeText(VentanaRegistro.this, "Rellena todos los campos", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -89,11 +97,14 @@ public class VentanaRegistro extends AppCompatActivity {
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
-    synchronized private void annadirRegistro(){
+    synchronized private void annadirRegistro(String contrasena, String correo, String nombre, String sexo, String telefono, String usuario){
         Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
+        user.put("Contrasena", contrasena);
+        user.put("Correo", correo);
+        user.put("Nombre", nombre);
+        user.put("Sexo",sexo);
+        user.put("Telefono",telefono);
+        user.put("Usuario",usuario);
 
         db.collection("users")
                 .add(user)

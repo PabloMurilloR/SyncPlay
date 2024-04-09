@@ -28,8 +28,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class MainActivity extends AppCompatActivity {
 
     private Button botonInicioSesion;
-    private EditText editTextDireccion;
-    private EditText editTextPassword;
+    private EditText editTextDireccion, editTextPassword;
     private TextView textviewRegistro;
     private FirebaseFirestore db;
 
