@@ -74,7 +74,11 @@ public class MainActivity extends AppCompatActivity {
         botonInicioSesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iniciarSesion(editTextDireccion.getText().toString(), editTextPassword.getText().toString());
+                if (!editTextDireccion.getText().toString().equals("") && !editTextPassword.getText().toString().equals("")) {
+                    iniciarSesion(editTextDireccion.getText().toString(), editTextPassword.getText().toString());
+                } else {
+                    Toast.makeText(MainActivity.this, "Rellena todos los campos", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
