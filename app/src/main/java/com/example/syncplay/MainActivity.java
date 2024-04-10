@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                                     actividadPrincipal.putExtra("Usuario", document.getString("Usuario"));
                                     startActivity(actividadPrincipal);
                                 } else {
-                                    // Si no se encuentra el correo o la contraseña es incorrecta, mostrar un mensaje de error
+                                    // Si no se encuentra el correo, mostrar un mensaje de error
                                     Toast.makeText(MainActivity.this, "Correo electrónico o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                                 }
                             }

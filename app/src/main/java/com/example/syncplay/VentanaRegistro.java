@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -77,9 +78,14 @@ public class VentanaRegistro extends AppCompatActivity {
         botonRegistro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!editTextContrasena.getText().toString().equals("") && !editTextCorreoRegistro.getText().toString().equals("") &&
-                    !editTextNombreRegistro.getText().toString().equals("") && spinerSexo.getSelectedItem() != null &&
-                    !editTextTelefonoRegistro.getText().toString().equals("") && !editTextUsuarioRegistro.getText().toString().equals("")) {
+                if (!editTextContrasena.getText().toString().equals("")
+                    && !editTextCorreoRegistro.getText().toString().equals("")
+                    && !editTextNombreRegistro.getText().toString().equals("")
+                    && spinerSexo.getSelectedItemPosition() != 0
+                    && !editTextTelefonoRegistro.getText().toString().equals("")
+                    && !editTextUsuarioRegistro.getText().toString().equals(""))
+                {
+
                     annadirRegistro(editTextContrasena.getText().toString(), editTextCorreoRegistro.getText().toString(),
                                     editTextNombreRegistro.getText().toString(), spinerSexo.getSelectedItem().toString(),
                                     editTextTelefonoRegistro.getText().toString(), editTextUsuarioRegistro.getText().toString());
@@ -114,13 +120,18 @@ public class VentanaRegistro extends AppCompatActivity {
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        Log.d("hola", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.d("Éxito", "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Toast.makeText(VentanaRegistro.this, "Usuario "+editTextUsuarioRegistro.getText()
+                                       +" ha sido registrado con éxito", Toast.LENGTH_LONG).show();
+
+                        Intent actividadRegistro = new Intent(VentanaRegistro.this, MainActivity.class);
+                        startActivity(actividadRegistro);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("adios", "Error adding document", e);
+                        Log.w("Error", "Error adding document", e);
                     }
                 });
     }
